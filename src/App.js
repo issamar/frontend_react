@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import'./App.css'
 
-function App() {
+import Records from "./components/pages/Records";
+import EditRecordPage from "./components/pages/EditRecordPage";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useParams,
+} from "react-router-dom";
+import AddRecord from './components/pages/AddRecord';
+import LoginPage from './components/pages/LoginPage';
+import PrivateRoutes from './components/pages/utils/PrivateRoute';
+import NavScrollExample from './components/Header';
+import { AuthProvider } from './components/context/AuthContext';
+
+function App(props) {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="Container">
+          <AuthProvider >
+            
+          <NavScrollExample/>
+          <Routes>
+            
+            
+              
+            <Route path='/login'  element={<LoginPage /> }/>
+            <Route element={<PrivateRoutes/>}>
+              
+            <Route path="/all" exact element={<Records/>} />
+            <Route path="/all/:id" element={< EditRecordPage/>} />
+            <Route path='/add_data' element={< AddRecord/>} /> 
+            </Route>
+            
+          </Routes>
+        </AuthProvider>
+      </div>
+    </Router>
   );
 }
 
