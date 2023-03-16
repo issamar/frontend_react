@@ -42,7 +42,7 @@ const AddRecord = () => {
         
 
         record.software = parseFloat(record.software)
-        record.checkout = (parseFloat(record.closing) + parseFloat(record.closing_money)) - parseFloat(record.opening)
+        record.checkout = (parseFloat(record.closing) + parseFloat(record.closing_money)) - (parseFloat(record.opening) + parseFloat(record.known_gap))
         
         
         await fetch(`/add_data`,

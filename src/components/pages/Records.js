@@ -5,7 +5,7 @@ import Record from '../Record'
 const Records = () => {
 
     let [records, setRecords] = useState([])
-    let {authTokens} = useContext(AuthContext)
+    let {authTokens,logoutUser} = useContext(AuthContext)
     
     useEffect(()=>{
         getRecords()
@@ -21,7 +21,12 @@ const Records = () => {
 
         }) 
         let data = await response.json()
-        setRecords(data)
+        if(response.status === 200){
+          setRecords(data)
+        }else if(response.statusText ==='Unauthorized'){
+          logoutUser()
+        }
+        
         
     
     }

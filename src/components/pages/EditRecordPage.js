@@ -51,7 +51,7 @@ const EditRecordPage = () => {
     const navigate = useNavigate()
     let updateRecord = async (e)=>{
         e.preventDefault()
-        record.checkout = (parseInt(record.closing) + parseInt(record.closing_money)) - record.opening
+        record.checkout = (parseFloat(record.closing) + parseFloat(record.closing_money)) - (parseFloat(record.opening) + parseFloat(record.known_gap))
         await fetch(`/all/${recordId}`,
         {
             method: 'PUT',
